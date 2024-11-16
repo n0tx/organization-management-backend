@@ -1,4 +1,4 @@
-# Organization Management
+# Organization Management Backend
 
 ![image](https://github.com/user-attachments/assets/c05dd956-d62f-4d74-bd42-70abe14fdc88)
 
