@@ -24,11 +24,6 @@ public class UserResource {
     @Autowired
     private UserService userService;
 
-//    @PostMapping("/register")
-//    public ResponseEntity<User> register(@RequestBody @Validated User user){
-//        return ResponseEntity.ok(userService.registerUserLocal(user));
-//    }
-
     @PostMapping("/v1/user/register")
     public ResponseEntity<User> registerUser(@Validated @RequestBody User user) {
         return new ResponseEntity<>(userService.registerUserLocal(user), HttpStatus.CREATED);
@@ -39,12 +34,6 @@ public class UserResource {
         return new ResponseEntity<>(userService.loginUserLocal(user), HttpStatus.OK);
     }
 
-//    @GetMapping("/auth/google")
-//    public ResponseEntity<String> loginGoogleAuth(HttpServletResponse response) throws IOException {
-//        response.sendRedirect("/oauth2/authorization/google");
-//        return ResponseEntity.ok("Redirecting ..");
-//    }
-
     @GetMapping("/v1/user/login/google")
     public ResponseEntity<String> loginGoogleAuth(HttpServletResponse response) throws IOException {
         response.sendRedirect("/oauth2/authorization/google");
@@ -54,7 +43,7 @@ public class UserResource {
     @GetMapping("/loginSuccess")
     public ResponseEntity<?> handleGoogleSuccess(OAuth2AuthenticationToken oAuth2AuthenticationToken){
         User user = userService.loginRegisterByGoogleOAuth2(oAuth2AuthenticationToken);
-        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("http://localhost:8081/customer/list")).build();
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("http://localhost:8080/customer/list")).build();
     }
 
     @PostMapping("/v1/user/logout")
