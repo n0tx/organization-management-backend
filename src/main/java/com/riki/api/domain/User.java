@@ -32,15 +32,6 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "position")
-    private String position;
-
-    @Column(name = "urlPicture")
-     private String urlPicture;
-
-    @Column(name = "role")
-    private String role;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "auth_provider")
     private AuthProvider authProvider;
