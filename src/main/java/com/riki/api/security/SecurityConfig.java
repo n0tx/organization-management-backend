@@ -15,6 +15,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    /*
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+                .csrf(AbstractHttpConfigurer::disable)
+                .headers(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults());
+        return http.build();
+    }
+     */
 
    @Bean
    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -23,7 +33,7 @@ public class SecurityConfig {
                .headers(AbstractHttpConfigurer::disable)
                .cors(Customizer.withDefaults())
                .authorizeHttpRequests(requests -> requests
-                       .requestMatchers("/v1/customer/**", "/v1/user/**", "/v1/custaddress/**", "/h2-ui/**").permitAll()
+                       .requestMatchers("/v1/user/**", "/v1/employee/**", "/uploads/**", "/h2-ui/**").permitAll()
                        .anyRequest().authenticated())
                .oauth2Login(oauth2 -> oauth2
                        .loginPage("/v1/user/login/google")

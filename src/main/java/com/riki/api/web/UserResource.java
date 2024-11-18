@@ -43,7 +43,7 @@ public class UserResource {
     @GetMapping("/loginSuccess")
     public ResponseEntity<?> handleGoogleSuccess(OAuth2AuthenticationToken oAuth2AuthenticationToken){
         User user = userService.loginRegisterByGoogleOAuth2(oAuth2AuthenticationToken);
-        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("http://localhost:8080/customer/list")).build();
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("http://localhost:8080/employee/list")).build();
     }
 
     @PostMapping("/v1/user/logout")
