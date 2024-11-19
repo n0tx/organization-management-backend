@@ -29,14 +29,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User loginUserLocal(User user) {
+        String errorMessage = "Email or password is incorrect";
         User existingUser = userRepository.findByEmail(user.getEmail()).orElse(null);
         if (existingUser != null){
             if (!passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
-                throw new RuntimeException("User password does  ot match");
+                throw new RuntimeException(errorMessage);
             }
             return existingUser;
         }
-        throw new RuntimeException("User not found");
+        throw new RuntimeException(errorMessage);
     }
 
     @Override

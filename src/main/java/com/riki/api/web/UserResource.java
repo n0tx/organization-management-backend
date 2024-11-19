@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Map;
 
 @RestController
 public class UserResource {
@@ -30,8 +31,13 @@ public class UserResource {
     }
 
     @PostMapping("/v1/user/login/local")
-    public ResponseEntity<User> loginLocal(@RequestBody User user){
-        return new ResponseEntity<>(userService.loginUserLocal(user), HttpStatus.OK);
+    public ResponseEntity<?> loginLocal(@RequestBody User user){
+        try {
+            User loggedInUser = userService.loginUserLocal(user);
+            return ResponseEntity.ok(loggedInUser);
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("loginMessage", ex.getMessage()));
+        }
     }
 
     @GetMapping("/v1/user/login/google")
